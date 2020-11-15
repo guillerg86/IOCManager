@@ -17,8 +17,6 @@ def threats_manager_home(request):
     # Obtenemos los datos
     # Últimas añadidas a whitelist
     last_excluded_ips = AllowedIP.objects.all().order_by('-created')[:5]
-    for item in last_excluded_ips:
-        print("IP: "+item.ip+" "+str(item.created))
     # Últimas añadidas a blocked
     last_blocked_ips = BlockedIP.objects.all()
     last_blocked_ips = last_blocked_ips.exclude(ip__in=AllowedIP.objects.all().values_list('ip',flat=True))
@@ -39,10 +37,6 @@ def threats_manager_home(request):
 
 
 def ajax_get_last_allowedips(request):
-    last_excluded_ips = get_last_allowedips()
-    for item in last_excluded_ips:
-        print("IP: "+item.ip+" "+str(item.created))
-
     try:
         allowed_ips_qs = qs_to_array_dict(get_last_allowedips())
         data = {'result': 'OK', 'last_whitelisted_ips':allowed_ips_qs }
