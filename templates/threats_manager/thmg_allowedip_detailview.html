@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar_title %}Threats IPs > <span class="small">Allow {{ object.ip }}</span>{% endblock %}
+{% block app_imports %}
+    {% block view_imports %}{% endblock %}
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 my-3">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-light">
+                            <h6 class="font-weight-bold mb-0">{{ object.ip }} info</h6>
+                        </div>
+                        <div class="card-body pt-2">
+                            <dl>
+                                <dt>IP Address</dt>
+                                <dd>{{ object.ip }}</dd>
+
+                                <dt>Short Description</dt>
+                                <dd>{{ object.short_description }}</dd>
+
+                                <dt>Description</dt>
+                                <dd>{{ object.description }}</dd>
+
+                                <dt>Created</dt>
+                                <dd>{{ object.created }}</dd>
+
+                                <dt>Updated</dt>
+                                <dd>{{ object.modified }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 my-3">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-light">
+                            <h6 class="font-weight-bold mb-0">Blocked by sources</h6>
+                        </div>
+
+                        <table class="table table-striped table-bordered table-sm">
+                            <thead>
+                            <th>Source</th>
+                            <th>Ban Date</th>
+                            <th>Ban Expires</th>
+                            </thead>
+                            <tbody>
+                            {% for item in blocked_ips %}
+                                <tr>
+                                    <td><span style="cursor:help" title="{{ item.description }}">{{ item.source }}</span></td>
+                                    <td>{{ item.ban_date|date:"Y-m-d" }}</td>
+                                    <td>{% if item.ban_expires == None %}Never{% else %}
+                                        {{ item.ban_expires|date:"Y-m-d" }}{% endif %}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <span class="blink text-success font-weight-bold"><i
+                                                class="fa fa-check"></i></span>
+                                        This IP has not been reported yet
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

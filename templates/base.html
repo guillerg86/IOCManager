@@ -20,6 +20,8 @@
             integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -41,6 +43,8 @@
 
 <body>
 <div class="d-flex" id="content-wrapper">
+
+
     <!-- Sidebar -->
     <div id="sidebar-container" class="bg-primary">
         <div class="logo"><img src="{% static 'images/company_brand.png' %}" style="width:12rem"></div>
@@ -51,7 +55,6 @@
         </div>
     </div>
     <!-- Fin sidebar -->
-
     <div class="w-100">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
@@ -93,6 +96,8 @@
     </div>
 </div>
 
-<script>{% block app_js_script %}{% endblock %}</script>
+<script>
+    {% block app_js_script %}{% endblock %}
+</script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+{% load iocm_tags %}
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="?{% param_replace page=1 %}">&laquo; first</a>&nbsp;&nbsp;
+        <a href="?{% param_replace page=page_obj.previous_page_number %}">previous</a>
+    {% endif %}
+    &nbsp;&nbsp;<span class="current">{{ page_obj.number }}/{{ page_obj.paginator.num_pages }}</span>&nbsp;&nbsp;
+    {% if page_obj.has_next %}
+        <a href="?{% param_replace page=page_obj.next_page_number %}">next</a>&nbsp;&nbsp;
+        <a href="?{% param_replace page=page_obj.paginator.num_pages %}">last &raquo;</a>
+    {% endif %}
+{% endif %}
